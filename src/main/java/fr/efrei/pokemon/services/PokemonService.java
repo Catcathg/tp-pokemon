@@ -46,7 +46,7 @@ public class PokemonService {
         Pokemon pokemonAModifier = findById(id);
         pokemonAModifier.setType(pokemonBody.getType());
         pokemonAModifier.setName(pokemonBody.getName());
-        pokemonAModifier.setLevel(pokemonBody.getLevel());
+        pokemonAModifier.setXp(pokemonBody.getXp());
         pokemonRepository.save(pokemonAModifier);
     }
 
@@ -58,8 +58,8 @@ public class PokemonService {
         if(pokemonBody.getName() != null) {
             pokemonAModifier.setName(pokemonBody.getName());
         }
-        if(pokemonBody.getLevel() != 0) {
-            pokemonAModifier.setLevel(pokemonBody.getLevel());
+        if(pokemonBody.getXp() != 0) {
+            pokemonAModifier.setXp(pokemonBody.getXp());
         }
         pokemonRepository.save(pokemonAModifier);
     }

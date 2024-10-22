@@ -7,15 +7,38 @@ import jakarta.persistence.*;
 public class Pokemon {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID) // AUTO INCREMENT
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     private String name;
 
-    private int level;
+    private int xp;
 
     @Enumerated(EnumType.STRING)
-    private Type type; // SI mon pokemon est type feu -> Type == "FEU"
+    private Type type;
+
+    @ManyToOne
+    @JoinColumn(name = "trainer_id")
+    private Trainer trainer;
+
+    public Pokemon() {
+
+    }
+
+    public Pokemon(String name, Type type) {
+        this.name = name;
+        this.type = type;
+        this.xp = type.getXp();
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -25,12 +48,12 @@ public class Pokemon {
         this.name = name;
     }
 
-    public int getLevel() {
-        return level;
+    public int getXp() {
+        return xp;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setXp(int xp) {
+        this.xp = xp;
     }
 
     public Type getType() {
@@ -39,13 +62,7 @@ public class Pokemon {
 
     public void setType(Type type) {
         this.type = type;
+        this.xp = type.getXp();
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }

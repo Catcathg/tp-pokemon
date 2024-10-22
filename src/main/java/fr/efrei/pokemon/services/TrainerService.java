@@ -32,26 +32,24 @@ public class TrainerService {
         return repository.findById(id).orElse(null);
     }
 
+    // Nouvelle méthode pour trouver un dresseur par son nom
+    public Trainer findByName(String name) {
+        return repository.findByName(name);
+    }
+
     public void save(CreateTrainer trainerBody) {
         Trainer trainer = new Trainer();
         trainer.setName(trainerBody.getName());
-        // On récupère la liste des ids des pokemon du body postman
+
         List<String> pokemonIds = trainerBody.getTeam();
-        // On déclare une nouvelle liste de pokemon
         List<Pokemon> pokemonAAjouter = new ArrayList<>();
-        // pour chaque id de pokemon dans ma liste d'id
         for (String idPokemon : pokemonIds) {
-            // je récupere le pokemon avec l'id courant
             Pokemon pokemon = pokemonService.findById(idPokemon);
-            // si le pokemon existe
             if (pokemon != null) {
-                // je l'ajoute a ma liste de pokemon
                 pokemonAAjouter.add(pokemon);
             }
         }
-        // j'applique la liste de pokemon au trainer que je créé
         trainer.setTeam(pokemonAAjouter);
-        // pokemonIds.forEach(id -> pokemonService.findById(id));
         repository.save(trainer);
     }
 
@@ -79,4 +77,5 @@ public class TrainerService {
     public void delete(String id) {
         repository.deleteById(id);
     }
+
 }

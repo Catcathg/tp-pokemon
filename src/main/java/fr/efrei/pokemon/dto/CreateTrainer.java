@@ -3,11 +3,10 @@ package fr.efrei.pokemon.dto;
 import java.util.List;
 
 public class CreateTrainer {
-
     private String name;
+    private List<String> team; // Liste des IDs des Pokémon
 
-    private List<String> team;
-
+    // Getters et Setters
     public String getName() {
         return name;
     }
@@ -24,4 +23,5 @@ public class CreateTrainer {
         this.team = team;
     }
 }
+
 //on prend pas l'id
